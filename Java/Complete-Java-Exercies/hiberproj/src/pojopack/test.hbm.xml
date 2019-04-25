@@ -1,0 +1,19 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pojopack.Test" table="TEST" mutable="true">
+       
+       	<composite-id name="ckey" class="pojopack.CompKey">
+       		<key-property name="pid" type="int"/>
+         	<key-property name="sid" type="int"/>
+       	</composite-id>
+        <version name="version"></version>
+        <property name="tname" />
+        <property name="records" type="serializable">
+        	<column name="records" sql-type="blob"></column>
+        </property>
+ 
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,90 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+   
+   <bean id = "brush" class="springpack.PaintBrush">
+   		<property name="Paint">
+   			<ref bean="paint"/>
+   		</property>
+   </bean>
+   <bean id="paint" class = "springpack.BluePaint"/>
+   
+   <!-- <bean class ="factorypack.MyBeanPostProcessor"/> -->
+   <bean id = "shop" class = "factorypack.LuckyShoeShop" scope="singleton" init-method="init" destroy-method="destroy">
+   		<property name = "factory">
+   			<ref bean = "bata"/>
+   		</property>
+   </bean>
+   
+   <bean id = "bata" class = "factorypack.Bata">
+   	<property name="shoe">
+   		<ref bean = "shoe"/>
+   	</property>
+   </bean>
+   <bean id = "shoe" class = "factorypack.SportShoe"/>
+   <bean id = "customer" class = "factorypack.Customer">
+   	<constructor-arg>
+   		<value>12</value>
+   	</constructor-arg>
+	   	<property name="name">
+	   		<value>Gladstone</value>
+	   	</property>
+   </bean>
+   <bean id = "pointcutadvisor1" class = "org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+   	<property name="mappedName">
+   		<value>sell*</value>
+   	</property>
+   	<property name="advice">
+   		<ref bean="wadvice"/>
+   	</property>
+   </bean>
+    <bean id = "pointcutadvisor2" class = "org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+   	<property name="mappedName">
+   		<value>sell*</value>
+   	</property>
+   	<property name="advice">
+   		<ref bean="eadvice"/>
+   	</property>
+   </bean>
+    <bean id = "pointcutadvisor3" class = "org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+   	<property name="mappedName">
+   		<value>sell*</value>
+   	</property>
+   	<property name="advice">
+   		<ref bean="aadvice"/>
+   	</property>
+   </bean>
+   <bean id = "purchase" class = "factorypack.PurchaseImpl"/>
+   <bean id = "purchaseadvice" class = "org.springframework.aop.support.DefaultIntroductionAdvisor">
+   	<constructor-arg>
+   		<ref bean = "purchase" />
+   	</constructor-arg>
+   </bean>
+   
+   <bean id = "wadvice" class = "factorypack.WelcomeAdvice"/>
+   <bean id = "eadvice" class = "factorypack.ExceptionAdviceHandler"/>
+   <bean id = "aadvice" class = "factorypack.AroundAdvice"/>
+   <bean id = "advicedshop" class = "org.springframework.aop.framework.ProxyFactoryBean">
+   	<property name="proxyInterfaces">
+	   	<list>
+	   		<value>factorypack.Seller</value>
+	   		<value>factorypack.Purchase</value>
+	   	</list>
+   	</property>
+   	<property name="interceptorNames">
+	   	<list>
+	   		<value>pointcutadvisor1</value>
+	   		<value>pointcutadvisor2</value>
+	   		<value>pointcutadvisor3</value>
+	   		<value>purchaseadvice</value>
+	   	</list>	
+   	</property>
+   	<property name="target">
+   		<ref bean = "shop"/>
+   	</property>
+   
+   </bean>
+  </beans>

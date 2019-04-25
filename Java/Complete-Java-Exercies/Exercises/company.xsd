@@ -1,0 +1,10 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+<xsd:element name="CompanyList" type="companytype"/>
+
+<xsd:complexType name="companytype">
+	<xsd:sequence>
+		<xsd:element name="Company" type="companycontenttype" maxOccurs="unbounded"></xsd:element>
+	</xsd:sequence>
+</xsd:complexType>
+

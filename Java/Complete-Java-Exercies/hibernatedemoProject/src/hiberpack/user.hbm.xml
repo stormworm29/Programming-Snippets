@@ -1,0 +1,36 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="hiberpack.UserPojo" table="USERS">
+   
+        <id name="uid"  />
+        <property name="uname" column="username"/>
+        <property name="upass" column="password"/>
+        <property name="status"/>
+        <set name ="address" table = "ADDRESS" cascade = "all" lazy = "true" inverse="false">
+        	<key column = "uid"></key>
+        	<one-to-many class = "hiberpack.Address"/>
+        </set>
+        <set name = "trainings" table = "training" cascade = "all" lazy = "true" inverse = "false">
+        	<key column="tid"></key>
+        	<many-to-many column = "training_id" class = "hiberpack.Training"></many-to-many>
+        </set>
+     </class>
+     
+     <class name="hiberpack.Address" table="addresses">
+        <id name = "id"  />
+        <property name="street"/>
+        <property name="city"/>
+        <many-to-one name="user" column="uid" class = "hiberpack.UserPojo"></many-to-one>
+     </class>
+	<class name = "hiberpack.Training" table="trainings">
+		<id name = "tid"/>
+		<property name = "subject"/>
+		<property name="tname"/>
+		<set name = "users" table = "user" cascade = "all" lazy="true" inverse = "false">
+			<key column="uid"></key>
+			<many-to-many column="user_id" class = "hiberpack.UserPojo"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

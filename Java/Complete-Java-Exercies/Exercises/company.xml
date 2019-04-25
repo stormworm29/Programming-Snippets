@@ -1,0 +1,43 @@
+<?xmlversion="1.0"encoding="UTF-8"standalone="yes"?>
+<CompanyList>
+	<Company>
+		<name>Sirius</name>
+		<EmployeeList>
+			<Employee>
+				<name>Kevin</name>
+				<id>111</id>
+				<age>21</age>
+			</Employee>
+			<Employee>
+				<name>Gladstone</name>
+				<id>1231</id>
+				<age>21</age>
+			</Employee>
+			<Employee>
+				<name>Aishwarya</name>
+				<id>1345</id>
+				<age>21</age>
+			</Employee>
+		</EmployeeList>
+	</Company>
+	<Company>
+		<name>Ascendant</name>
+		<EmployeeList>
+			<Employee>
+				<name>Chandra</name>
+				<id>881</id>
+				<age>21</age>
+			</Employee>
+			<Employee>
+				<name>Ashwinie</name>
+				<id>991</id>
+				<age>21</age>
+			</Employee>
+			<Employee>
+				<name>Veena</name>
+				<id>1001</id>
+				<age>21</age>
+			</Employee>
+		</EmployeeList>
+	</Company>
+</CompanyList>
